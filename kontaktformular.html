@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Formular</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+    }
+
+    input, select, textarea, button {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Formular</h2>
+
+<form id="contact-form">
+
+  <input type="text" name="name" placeholder="Name" required>
+
+  <input type="tel" name="phone" placeholder="Telefonnummer" required>
+
+  <select name="service">
+    <option value="Auswahl 1">Auswahl 1</option>
+    <option value="Auswahl 2">Auswahl 2</option>
+    <option value="Auswahl 3">Auswahl 3</option>
+  </select>
+
+  <textarea name="complaint" placeholder="Beschwerde"></textarea>
+
+  <button type="submit">Senden</button>
+
+</form>
+
+<script>
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        resolve({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude
+        });
+      };
+      () => reject("Standort verweigert")
+    );
+  });
+}	
+document.getElementById("contact-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  let location;
+  try {
+    location = await getLocation();
+  } catch (err) {
+    alert("Standort ist erforderlich!");
+    return;
+  }
+
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+
+  const res= await fetch("http://localhost:3000/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ...data,
+      lat: location.lat,
+      lng: location.lng
+    })
+  });
+  
+  const result = await res.json();
+  
+  if (!res.ok) {
+    alert(result.error);
+    return;
+  }
+
+  alert("Gesendet!");
+
+});
+</script>
+
+</body>
+</html>
