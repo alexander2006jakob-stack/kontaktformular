@@ -55,7 +55,7 @@ function getLocation() {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
         });
-      };
+      },
       () => reject("Standort verweigert")
     );
   });
