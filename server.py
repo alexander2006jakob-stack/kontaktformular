@@ -3,6 +3,7 @@ from flask_cors import CORS
 import smtplib
 import math
 import os
+import traceback
 
 EMAIL = os.environ.get("EMAIL")
 PASSWORD = os.environ.get("PASSWORD")
@@ -84,7 +85,7 @@ def contact():
         return jsonify({"success": True})
 
     except Exception as e:
-        print(e)
+        traceback.print_exc()
         return jsonify({"error": "Mail konnte nicht gesendet werden"}), 500
 
 
