@@ -51,7 +51,6 @@ ${complaint}
       body: JSON.stringify({
         from: "onboarding@resend.dev",
         to: ["test.p1.alexjakob@gmail.com"],
-        subject: "Neue Anfrage",
         text: message
       })
     });
