@@ -73,9 +73,6 @@
       transition: 0.2s;
     }
 
-    button:hover {
-      opacity: 0.9;
-    }
 
     .privacy {
       font-size: 12px;
@@ -105,14 +102,12 @@
       font-size: 12px;
       width: 180px;
       z-index: 999;
-      opacity: 0;
-      transition: opacity 0.2s;
     }
 
-    .info:hover .tooltip {
+    .tooltip.active {
       display: block;
-      opacity: 1;
     }
+
 
     .success {
       text-align: center;
@@ -153,7 +148,7 @@
         </svg>
       </span>
       <input type="text" name="name" placeholder="Ihr vollständiger Name" required>
-      <span class="info" onclick="toggleTooltip(this)">i
+      <span class="info">i
         <span class="tooltip">Wir benötigen Ihren Namen zur Zuordnung der Anmeldung.</span>
       </span>
     </div>
@@ -167,7 +162,7 @@
       </span>
       <input type="tel" name="phone" placeholder="Ihre Telefonnummer" required>
       <span class="info">i
-        <span class="tooltip" onclick="toggleTooltip(this)">Ihre Telefonnummer benötigen wir, um Sie schnell aufrufen zu können.</span>
+        <span class="tooltip">Ihre Telefonnummer benötigen wir, um Sie schnell aufrufen zu können.</span>
       </span>
     </div>
 
@@ -184,7 +179,7 @@
         <option>Impfung</option>
       </select>
       <span class="info">i
-        <span class="tooltip" onclick="toggleTooltip(this)">Wählen Sie die passende Leistung aus.</span>
+        <span class="tooltip">Wählen Sie die passende Leistung aus.</span>
       </span>
     </div>
 
@@ -197,7 +192,7 @@
       </span>
       <textarea name="complaint" placeholder="Beschreiben Sie Ihre Beschwerden"></textarea>
       <span class="info">i
-        <span class="tooltip" onclick="toggleTooltip(this)">Ein genaue Beschreibung ihres Anliegen hilft uns bei der Bearbeitung ihrer Anmeldung.</span>
+        <span class="tooltip">Ein genaue Beschreibung ihres Anliegen hilft uns bei der Bearbeitung ihrer Anmeldung.</span>
       </span>
     </div>
 
@@ -213,20 +208,27 @@
 </div>
 
 <script>
-function toggleTooltip(el) {
-  const tooltip = el.querySelector(".tooltip");
-  const isVisible = tooltip.style.display === "block";
+document.querySelectorAll(".info").forEach(info => {
+  info.addEventListener("click", (e) => {
+    e.stopPropagation();
 
-  document.querySelectorAll(".tooltip").forEach(t => t.style.display = "none");
+    const tooltip = info.querySelector(".tooltip");
+    const isOpen = tooltip.classList.contains("active");
 
-  if (!isVisible) {
-    tooltip.style.display = "block";
-  }
-}
-document.addEventListener("click", function(e) {
-  if (!e.target.closest(".info")) {
-    document.querySelectorAll(".tooltip").forEach(t => t.style.display = "none");
-  }
+    document.querySelectorAll(".tooltip").forEach(t => {
+      t.classList.remove("active");
+    });
+
+    if (!isOpen) {
+      tooltip.classList.add("active");
+    }
+  });
+});
+  
+document.addEventListener("click", () => {
+  document.querySelectorAll(".tooltip").forEach(t => {
+    t.classList.remove("active");
+  });
 });
 function getLocation() {
   return new Promise((resolve, reject) => {
