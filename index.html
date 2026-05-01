@@ -39,6 +39,7 @@
       display: flex;
       align-items: center;
       margin-bottom: 15px;
+      gap: 10px;
     }
 
     .icon {
@@ -96,10 +97,12 @@
 
     .phone-wrapper {
       display: flex;
+      flex: 1;
       width: 100%;
     }
 
     .prefix {
+      white-space: nowrap;
       background: #eef5ff;
       padding: 12px;
       border: 1px solid #dbe4f3;
@@ -110,6 +113,8 @@
     }
 
     .phone-wrapper input {
+      flex: 1;
+      min-width: 0;
       border-radius: 0 8px 8px 0;
       border-left: none;
     }
