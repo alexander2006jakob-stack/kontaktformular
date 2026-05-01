@@ -283,6 +283,10 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   const formData = new FormData(e.target);
   const data = Object.fromEntries(formData);
 
+  if (!data.phone.startsWith("+49")) {
+    data.phone = "+49" + data.phone.replace(/^0+/, "");
+  }
+
   const res= await fetch("/api/contact", {
     method: "POST",
     headers: {
