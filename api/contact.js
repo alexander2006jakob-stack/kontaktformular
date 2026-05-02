@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, phone, service, complaint, lat, lng } = req.body;
+    const { name, birthdate, phone, service, doctor, complaint, lat, lng } = req.body;
 
     if (!lat || !lng) {
       return res.status(400).json({ error: "Standort erforderlich" });
