@@ -321,11 +321,10 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
       },
       body: JSON.stringify({
         ...data,
-        lat: location.lat,
-        lng: location.lng
+        lat: location?.lat,
+        lng: location?.lng
       })
     });
-  
     try {
       result = await res.json();
     } catch {}
@@ -338,6 +337,7 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
       if (errorEl) errorEl.textContent = result.error || "Fehler beim Senden";
     }
   } catch (error) {
+    console.error(error);
     if (errorEl) errorEl.textContent = "Serverfehler";
   } finally {
     button.disabled = false;
