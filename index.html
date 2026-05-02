@@ -233,6 +233,9 @@
     </div>
 
     <button type="submit" id="submitBtn">Anmeldung senden</button>
+    <p class="success"></p>
+    <p class="error"></p>
+    
 
     <div id="responseMessage"></div>
 
@@ -304,6 +307,10 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   if (!data.phone.startsWith("+49")) {
     data.phone = "+49" + data.phone.replace(/^0+/, "");
   }
+
+  const successEl = document.querySelector(".success");
+  const errorEl = document.querySelector(".error");
+  
   try {
     const res= await fetch("/api/contact", {
       method: "POST",
@@ -320,16 +327,17 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     const result = await res.json();
   
     if (!res.ok) {
-      document.querySelector(".success").textContent = "Anfrage erfolgreich gesendet!";
+      if (succesEl) successEl.textContent = "Anfrage erfolgreich gesendet!";
       document.getElementById("contact-form").reset();
     } else {
-      document.querySelector(".error").textContent = result.error || "Fehler beim Senden";
+      if (errorEl) errorEl.textContent = result.error || "Fehler beim Senden";
     }
   } catch (error) {
-    document.querySelector(".error").textContent = "Serverfehler";
+    if (errorEl) errorEl.textContent = "Serverfehler";
+  } finally {
+    button.disabled = false;
+    button.innerHTML = "Anmeldung senden"
   }
-  button.disabled = false;
-  button.innerHTML = "Anmeldung senden"
 });
 </script>
 
