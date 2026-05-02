@@ -331,7 +331,7 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     
   
     if (res.ok) {
-      if (succesEl) successEl.textContent = "Anfrage erfolgreich gesendet!";
+      if (successEl) successEl.textContent = "Anfrage erfolgreich gesendet!";
       document.getElementById("contact-form").reset();
     } else {
       if (errorEl) errorEl.textContent = result.error || "Fehler beim Senden";
