@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     const distance = getDistance(BASE_LAT, BASE_LNG, lat, lng);
     if (distance > MAX_DISTANCE) {
       return res.status(403).json({
-        error: 'Außerhalb des erlaubten Bereichs (${distance.toFixed(2)} km)'
+        error: `Außerhalb des erlaubten Bereichs (${distance.toFixed(2)} km)`
       });
     }
 
