@@ -310,6 +310,8 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
 
   const successEl = document.querySelector(".success");
   const errorEl = document.querySelector(".error");
+
+  let result = {}; 
   
   try {
     const res= await fetch("/api/contact", {
@@ -324,7 +326,10 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
       })
     });
   
-    const result = await res.json();
+    try {
+      result = await res.json();
+    } catch {}
+    
   
     if (res.ok) {
       if (succesEl) successEl.textContent = "Anfrage erfolgreich gesendet!";
