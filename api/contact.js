@@ -36,8 +36,10 @@ export default async function handler(req, res) {
 
     const message = `
 Name: ${name}
+Geburtsdatum: ${birthdate}
 Telefon: ${phone}
 Leistung: ${service}
+Arzt: ${doctor}
 Nachricht:
 ${complaint}
 `;
