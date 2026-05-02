@@ -304,7 +304,7 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   if (!data.phone.startsWith("+49")) {
     data.phone = "+49" + data.phone.replace(/^0+/, "");
   }
-  try:
+  try {
     const res= await fetch("/api/contact", {
       method: "POST",
       headers: {
