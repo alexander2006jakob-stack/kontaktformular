@@ -13,7 +13,7 @@
     }
 
     .container {
-      max-width: 500px;
+      max-width: 520px;
       margin: 60px auto;
       background: white;
       padding: 30px;
@@ -174,7 +174,6 @@
   </p>
 
   <form id="contact-form">
-
     <!-- Name -->
     <div class="form-group">
       <span class="icon">
@@ -187,6 +186,22 @@
         <span class="tooltip">Wir benötigen Ihren Namen zur Zuordnung der Anmeldung.</span>
       </span>
     </div>
+
+    <div class="form-group">
+      <span class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 2v2M17 2v2M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+        </svg>
+      </span>
+
+      <input type="date" name="birthdate" placeholder="TT/MM/JJJJ" required />
+
+      <span class="info">i
+        <span class="tooltip">Wir benötigen Ihr Geburtsdatum zur Zuordnung der Anmeldung.</span>
+      </span>
+      
+    </div>
+
 
     <!-- Telefon -->
     <div class="form-group phone-group">
@@ -216,6 +231,22 @@
       </select>
       <span class="info">i
         <span class="tooltip">Wählen Sie die passende Leistung aus.</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <span class="icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+        </svg>
+      </span>
+      <select name="doctor" required>
+        <option value="">Arzt/Ärztin auswählen</option>
+        <option>Dr.Jakob</option>
+        <option>Dr.Caspar</option>
+      </select>
+      <span class="info">i
+        <span class="tooltip">Wählen Sie Ihren Wunsch-Arzt oder Ihre Wunsch-Ärztin aus.</span>
       </span>
     </div>
 
@@ -331,7 +362,7 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
     
   
     if (res.ok) {
-      if (successEl) successEl.textContent = "Anfrage erfolgreich gesendet!";
+      if (successEl) successEl.textContent = "Anmeldung erfolgreich gesendet!";
       document.getElementById("contact-form").reset();
     } else {
       if (errorEl) errorEl.textContent = result.error || "Fehler beim Senden";
