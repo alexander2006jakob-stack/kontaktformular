@@ -1,0 +1,30 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Termin stornieren</title>
+</head>
+<body>
+
+<h2>Termin stornieren</h2>
+<p id="info">Lade...</p>
+
+<script>
+	const params = new URLSearchParams(window.location.search);
+	const token = params.get("token");
+
+	if (token) {
+		document.getElementById("info").innerText =
+			"Möchten Sie den Termin wirklich stronieren?";
+	} else {
+		document.getElementById("info").innerText =
+			"Kein gültiger Link";
+	}
+	
+	function stornieren() {
+		if (!token) return;
+		document.body.innerHTML = "<h2>Termin wurde storniert</h2>"
+	}
+</script>
+
+</body>
+</html>
