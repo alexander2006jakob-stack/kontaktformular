@@ -14,7 +14,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 from: "onboarding@resend.dev",
-                to: "DEINE_EMAIL",   // ← ändern!
+                to: "test.p1.alexjakob@gmail.com",  
                 subject: "Termin storniert",
                 html: `<p>Storno für Token: ${token}</p>`
             })
