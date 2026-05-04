@@ -8,6 +8,8 @@
 <h2>Termin stornieren</h2>
 <p id="info">Lade...</p>
 
+<button onclick="stornieren()">Termin stornieren</button>
+
 <script>
 	const params = new URLSearchParams(window.location.search);
 	const token = params.get("token");
@@ -19,9 +21,17 @@
 		document.getElementById("info").innerText =
 			"Kein gültiger Link";
 	}
-	
-	function stornieren() {
+
+	async function stornieren() {
 		if (!token) return;
+
+		await fetch("/api/storno", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ token: token })
+		});
 		document.body.innerHTML = "<h2>Termin wurde storniert</h2>"
 	}
 </script>
