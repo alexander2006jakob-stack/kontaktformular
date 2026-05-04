@@ -261,11 +261,19 @@
       4. Wir melden uns pünktlich per SMS bei Ihnen. Bitte begeben Sie sich <strong>umgehend</strong> zur Praxis.
     </p>
 
-    <label class="checkbox">
-      <input type="checkbox" id="confirmCheck" />
-      Ich habe die Informationen gelesen und akzeptiere die Bedingungen.
-    </label>
-
+    <div class="checkbox">
+      <input type="checkbox" id="checkStandort" />
+      <label for="checkStandort">
+        Ich bin damit einverstanden, dass auf meinen Standort zugegriffen wird.
+      </label>
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" id="checkSMS" />
+      <label for="checkSMS">
+        Ich bin damit einverstanden, dass ich per SMS über den Status meiner Anmeldung benachrichtigt werde.
+      </label>
+    </div>
+    
     <button id="startBtn" disabled>
       Mit der Anmeldung beginnen
     </button>
@@ -384,21 +392,24 @@
 </div>
 
 <script>
-const checkbox = document.getElementById("confirmCheck");
+const checkStandort = document.getElementById("checkStandort");
+const checkSMS = document.getElementById("checkSMS");
 const buttonStart = document.getElementById("startBtn");
 const overlay = document.getElementById("introOverlay");
 
-// Checkbox aktiviert Button
-checkbox.addEventListener("change", () => {
-  if (checkbox.checked) {
+function updateButtonState() {
+  if (checkStandort.checked && checkSMS.checked) {
     buttonStart.disabled = false;
     buttonStart.classList.add("active");
   } else {
     buttonStart.disabled = true;
     buttonStart.classList.remove("active");
   }
-});
+}
 
+checkStandort.addEventListener("change", updateButtonState);
+checkSMS.addEventListener("change", updateButtonState);
+  
 // Klick auf Start
 buttonStart.addEventListener("click", () => {
   overlay.style.display = "none";
