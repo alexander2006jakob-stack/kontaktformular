@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const BASE_LAT = 49.4818289;
     const BASE_LNG = 7.7331569;
 
-    const MAX_DISTANCE = 0.1;
+    const MAX_DISTANCE = 700;
     function getDistance(lat1, lon1, lat2, lon2){
       const R = 6371;
       const dLat = (lat2-lat1) * Math.PI / 180;
